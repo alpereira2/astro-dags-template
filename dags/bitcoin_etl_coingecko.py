@@ -26,13 +26,9 @@ def fetch_bitcoin_history_from_coingecko():
     # Janela "ontem": [data_interval_start - 1 dia, data_interval_start)
     end_time = ctx["data_interval_start"]
     start_time = end_time - timedelta(days=1)
-
-    print(f"[UTC] janela-alvo: {start_time} -> {end_time}")
-
     # CoinGecko exige epoch em segundos (não ms)
     start_s = int(start_time.timestamp())
     end_s = int(end_time.timestamp())
-
     url = "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range"
     params = {
         "vs_currency": "usd",
