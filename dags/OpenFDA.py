@@ -28,7 +28,6 @@ def fetch_openfda_data() -> list[dict]:
     Returning a JSON-serializable object automatically stores it in XCom.
     """
     ctx = get_current_context()
-    # Airflow 2.x: logical_date is the run's timestamp (pendulum dt)
     logical_date = ctx["data_interval_start"]
     year, month = logical_date.year, logical_date.month
 
