@@ -29,7 +29,7 @@ def fetch_openfda_data() -> list[dict]:
     """
     ctx = get_current_context()
     # Airflow 2.x: logical_date is the run's timestamp (pendulum dt)
-    logical_date = ctx["logical_date"]
+    logical_date = ctx["data_interval_start"]
     year, month = logical_date.year, logical_date.month
 
     url = generate_query_url(year, month)
