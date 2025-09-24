@@ -66,9 +66,6 @@ def fetch_openfda_data() -> list[dict]:
 
 @task
 def save_to_postgresql(rows: list[dict]) -> None:
-    """
-    Save rows (list of {'time': 'YYYY-MM-DD', 'count': int}) to Postgres.
-    """
     if not rows:
         print("No data to write to Postgres for this period.")
         return
@@ -80,7 +77,6 @@ def save_to_postgresql(rows: list[dict]) -> None:
     pg_hook = PostgresHook(postgres_conn_id="postgres")
     engine = pg_hook.get_sqlalchemy_engine()
 
-    # Use a transaction
     with engine.begin() as conn:
         df.to_sql("openfda_data", con=conn, if_exists="append", index=False)
 
